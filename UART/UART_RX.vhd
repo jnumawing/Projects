@@ -70,9 +70,12 @@ begin
     else
         case state is
             when idle => if rx = '0' then
-                         state <= start;
-                         count_reg <= SAMPLE_AMT/2 - 1;
-                         bit_count <= DATA_WIDTH - 1;
+                            state <= start;
+                            count_reg <= 0;
+                         else
+                            state <= idle;
+                            count_reg <= SAMPLE_AMT/2 - 1;
+                            bit_count <= DATA_WIDTH - 1;
                          end if;
             
             when start => if baud = '1' then
